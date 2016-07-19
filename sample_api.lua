@@ -22,7 +22,7 @@ end
 --#ENDPOINT GET /verify/{code}
 local ret = User.activateUser({code = request.parameters.code})
 if ret == 'OK' then
-  response.headers["Content-type"] = "text/html"
+  response.headers["content-type"] = "text/html"
   response.message = '<html><head></head><body>Signed up successfully. <a href="/#/login">Log in</a></body></html>'
 else
   response.message = 'Sign up failed. Error: ' .. ret.message
@@ -69,12 +69,12 @@ if user == nil or user.id == nil then
   return
 end
 
--- only add device if the Product event handler has 
+-- only add device if the Product event handler has
 -- heard from it (see event_handler/product.lua)
 device = kv_read_opt(sn, false)
 if device == nil then
   http_error(404, response)
-  return  
+  return
 end
 
 local owners = User.listRoleParamUsers({
@@ -170,7 +170,7 @@ if user ~= nil then
       if parameter.name == "sn" then
         local device_info = kv_read(parameter.value)
         if device_info == nil then
-          print("device_info returned from kv_read is nil in " .. 
+          print("device_info returned from kv_read is nil in " ..
             "GET /user/{email}/lightbulbs for sn " .. parameter.value)
         else
           if role.role_id == "owner" then
@@ -184,7 +184,7 @@ if user ~= nil then
       end
     end
   end
-  response.headers["Content-type"] = "application/json; charset=utf-8"
+  response.headers["content-type"] = "application/json; charset=utf-8"
   if table.getn(list) == 0 then
     return '[]'
   else
@@ -290,7 +290,7 @@ end
 http_error(403, response)
 --#ENDPOINT POST /lightbulb/{sn}
 -- write to one or more resources of lightbulb with serial number {sn}
--- Expects JSON object containing one or more properties in 
+-- Expects JSON object containing one or more properties in
 -- "state" | "humidity" | "temperature" with the values to be set.
 -- E.g. {"state": 1} to turn the lightbulb on
 local sn = tostring(request.parameters.sn)
