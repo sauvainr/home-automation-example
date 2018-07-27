@@ -24,7 +24,7 @@
 --   {"status": "error"}                        - there was a big
 --                                                problem (e.g. bad msg 
 --                                                format)
-function listen_response(status, id)
+function listen_respo
   response = {status=status}
   if id ~= nil then
     response.id = id
