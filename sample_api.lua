@@ -49,6 +49,8 @@ else
 end
 --#ENDPOINT GET /session
 --
+
+not valide at all
 local user = currentUser(request)
 if user ~= nil and user.id ~= nil then
     return user
